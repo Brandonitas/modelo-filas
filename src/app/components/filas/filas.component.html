@@ -1,0 +1,29 @@
+<div class="solution">
+
+	<!--------------------------------------------------------------------------------------->
+  <mat-horizontal-stepper #stepper>
+    <mat-step>
+      <app-mg1></app-mg1>
+    </mat-step>
+    <mat-step>
+      <app-mms></app-mms>
+    </mat-step>
+    <mat-step>
+      <app-mmsk></app-mmsk>
+    </mat-step>
+    <mat-step>
+      <app-mg1></app-mg1>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+  <!-- second option -->
+  <div>
+    <button (click)="goBack(stepper)" type="button" [disabled]="stepper.selectedIndex === 0">Back</button>
+    <button (click)="goForward(stepper)" type="button" [disabled]="stepper.selectedIndex === stepper._steps.length-1">NEXT</button>
+
+    <!-- using totalStepsCount -->
+    <!-- <button (click)="goForward(stepper)" type="button" [disabled]="stepper.selectedIndex === totalStepsCount-1">Next</button> -->
+  </div>
+	<!--------------------------------------------------------------------------------------->
+
+</div>

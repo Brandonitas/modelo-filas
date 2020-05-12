@@ -1,9 +1,14 @@
 <div class="mt-10">
 
+  <div class="title-container">
+    <h2 class="title">Modelo de filas de espera</h2>
+    <h6 class="subtitle my-5">Selecciona el modelo que quires simular:</h6>
+  </div>
+
   <div class="grid grid-cols-4 gap-4 cards-container">
     <!--CARD 1-->
-    <div class="relative bg-white max-w-sm rounded-lg overflow-hidden shadow-xl">
-      <div class="bg-white px-6 py-4">
+    <div (click)="goTo(stepper, 0)" style="cursor:pointer" class="relative bg-white max-w-sm rounded-lg overflow-hidden shadow-xl card">
+      <div class="bg-white px-6 pt-4">
         <div class="bg-white font-bold text-xl mb-2">M/M/1</div>
         <p class="bg-white text-gray-700 text-sm">
           Sistema abierto que contiene un único servidor con tiempos de llegada y servicio Marcovianos
@@ -13,8 +18,8 @@
     </div>
 
         <!--CARD 2-->
-        <div class="relative bg-white max-w-sm rounded-lg overflow-hidden shadow-xl">   
-          <div class="bg-white px-6 py-4">
+        <div (click)="goTo(stepper, 1)" style="cursor:pointer" class="relative bg-white max-w-sm rounded-lg overflow-hidden shadow-xl card">   
+          <div class="bg-white px-6 pt-4">
             <div class="bg-white font-bold text-xl mb-2">M/M/S</div>
             <p class="bg-white text-gray-700 text-sm">
               Sistema abierto que contiene S número de servidores con tiempos de llegada y servicio Marcovianos
@@ -24,8 +29,8 @@
         </div>
 
             <!--CARD 3-->
-    <div class="relative bg-white max-w-sm rounded-lg overflow-hidden shadow-xl">
-      <div class="bg-white px-6 py-4">
+    <div (click)="goTo(stepper, 2)" style="cursor:pointer" class="relative bg-white max-w-sm rounded-lg overflow-hidden shadow-xl card">
+      <div class="bg-white px-6 pt-4">
         <div class="bg-white font-bold text-xl mb-2">M/M/S/K</div>
         <p class="bg-white text-gray-700 text-sm">
           Sistema abierto que contiene S número de servidores con tiempos de llegada y servicio Marcovianos y K capacidad del sistema
@@ -35,8 +40,8 @@
     </div>
 
         <!--CARD 4-->
-        <div class="relative bg-white max-w-sm rounded-lg overflow-hidden shadow-xl">
-          <div class="bg-white px-6 py-4">
+        <div (click)="goTo(stepper, 3)" style="cursor:pointer" class="relative bg-white max-w-sm rounded-lg overflow-hidden shadow-xl card">
+          <div class="bg-white px-6 pt-4">
             <div class="bg-white font-bold text-xl mb-2">M/G/1</div>
             <p class="bg-white text-gray-700 text-sm">
               Sistema abierto que contiene un único servidor con tiempos de llegada Marcovianos y servicio General e independiente
@@ -46,4 +51,21 @@
         </div>
   </div>
 
+</div>
+
+<div class="stepers bg-white shadow-xl rounded-lg">
+  <mat-horizontal-stepper class="bg-white" #stepper>
+    <mat-step class="bg-white">
+      <app-mg1></app-mg1>
+    </mat-step>
+    <mat-step class="bg-white">
+      <app-mms></app-mms>
+    </mat-step>
+    <mat-step class="bg-white">
+      <app-mmsk></app-mmsk>
+    </mat-step>
+    <mat-step class="bg-white">
+      <app-mg1></app-mg1>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>

@@ -1,6 +1,11 @@
 .cards-container{
   margin-left: 50px;
   margin-right: 50px;
+  .card{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .img-card{
@@ -9,4 +14,26 @@
 
 .text-sm{
   font-size: 12px !important;
+}
+
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+.stepers{
+  margin-top: 50px;
+  margin-left: 110px;
+  margin-right: 110px;
+}
+
+.title-container{
+  margin-left: 110px;  
+}
+
+.title{
+  font-size: 24px;
+}
+
+.subtitle{
+  font-size: 16px;
 }
