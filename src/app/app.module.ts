@@ -35,6 +35,13 @@ import {
  import {MatStepperModule} from '@angular/material/stepper';
 import { RouterModule } from '@angular/router';
 
+//Style Angular Material
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatAutocompleteModule, MatDatepickerModule, 
+  MatFormFieldModule, MatRadioModule, MatSliderModule, 
+  MatSlideToggleModule } from '@angular/material';
+import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -48,6 +55,29 @@ import { RouterModule } from '@angular/router';
     Mg1Component
   ],
   imports: [
+    MatIconModule,
+    MatInputModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatOptionModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatListModule,
+    MatTooltipModule,
+    MatGridListModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatAutocompleteModule, 
+    MatDatepickerModule, 
+    MatFormFieldModule, 
+    MatRadioModule, 
+    MatSliderModule, 
+    MatSlideToggleModule,
+    MatSidenavModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatSelectModule,

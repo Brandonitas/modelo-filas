@@ -5,15 +5,18 @@ body{
 html, body { height: 100%; }
 body { margin: 0; font-family: "Value Sans Regular"; }
 
+*{
+  font-family: "Value Sans Regular";
+}
 
 @font-face {
   font-family: "Value Sans Regular";
-  src: url('/assets/fonts/Value.woff2') format('woff2'),
-       url('/assets/fonts/Value.woff') format('woff');
+  src: url('assets/fonts/Value.woff2') format('woff2'),
+       url('assets/fonts/Value.woff') format('woff');
 }
 
 @font-face {
   font-family: "Value Sans Medium";
-  src: url('/assets/fonts/Value-medium.woff2') format('woff2'),
-       url('/assets/fonts/Value-medium.woff') format('woff');
+  src: url('assets/fonts/Value-medium.woff2') format('woff2'),
+       url('assets/fonts/Value-medium.woff') format('woff');
 }

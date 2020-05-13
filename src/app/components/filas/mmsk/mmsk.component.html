@@ -1,1 +1,42 @@
-<p>mmsk works!</p>
+<div class="container-right">
+  <span class="text-3xl mt-5 block">M/M/S/K</span>
+  <div class="grid grid-cols-2">
+    <div class="input-container block justify-between mt-5">
+      <mat-form-field appearance="outline" class="input w-1/2" style="display: block !important;">
+        <mat-label>Lamnda</mat-label>
+        <input matInput #lambda>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline" class="input w-1/2" style="display: block !important;">
+        <mat-label>Mu</mat-label>
+        <input matInput #mu>
+      </mat-form-field>
+      <div class="flex">         
+        <button class="h-10 w-1/2 btn-generate" mat-raised-button>SIMULAR</button>
+      </div>
+    </div>
+    
+
+    <div>
+      <!--TABLE-->
+      <!--
+      <table *ngIf="result.length > 0" class="table-fixed m-auto mt-5">
+          <thead>
+            <tr>
+              <th class="w-1/4 px-4 py-2">Semilla</th>
+              <th class="w-1/4 px-4 py-2">No. Aleatorio</th>
+              <th class="w-1/4 px-4 py-2">Random Ri</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let number of result; let i = index" @fadeIn>
+            <tr>
+              <td class="border px-4 py-2">X{{i}} = {{semilla[i]}}</td>
+              <td class="border px-4 py-2">X{{i+1}} = {{random[i]}}</td>
+              <td class="border px-4 py-2">R{{i+1}} = {{number}}</td>
+            </tr>
+          </tbody>
+        </table>-->
+  
+    </div>
+  </div>
+  </div>
