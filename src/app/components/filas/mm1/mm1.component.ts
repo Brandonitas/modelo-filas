@@ -39,6 +39,8 @@ export class Mm1Component implements OnInit {
   public pN: any;
   public pW : any;
   public pWQueue: any;
+
+  public isActive = false;
   
   mm1 = (lambda, mu) =>{
       this.cleanData();
@@ -97,7 +99,8 @@ export class Mm1Component implements OnInit {
   clickButton(lambda, mu, n, t){
 
     //Validar que no esten vacios inputs
-
+    this.isActive = true;
+    
     this.mm1(lambda, mu);
     if(n != ''){
       this.mm1n(lambda, mu, n);

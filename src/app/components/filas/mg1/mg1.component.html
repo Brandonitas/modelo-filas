@@ -1,23 +1,23 @@
 <div class="container-right">
   <span class="text-3xl mt-5 block">M/G/1</span>
-  <div class="grid grid-cols-2">
-    <div class="input-container block justify-between mt-5">
-      <mat-form-field appearance="outline" class="input w-1/2" style="display: block !important;">
+  <div class="grid grid-cols-4">
+    <div class="col-span-1 input-container block justify-between mt-5">
+      <mat-form-field appearance="outline" class="input w-full" style="display: block !important;">
         <mat-label>Lamnda</mat-label>
         <input matInput #lambda>
       </mat-form-field>
     
-      <mat-form-field appearance="outline" class="input w-1/2" style="display: block !important;">
+      <mat-form-field appearance="outline" class="input w-full" style="display: block !important;">
         <mat-label>Mu</mat-label>
         <input matInput #mu>
       </mat-form-field>
       <div class="flex">         
-        <button class="h-10 w-1/2 btn-generate" mat-raised-button>SIMULAR</button>
+        <button class="h-10 w-full btn-generate" mat-raised-button>SIMULAR</button>
       </div>
     </div>
     
 
-    <div>
+    <div class="col-span-3">
       <!--TABLE-->
       <!--
       <table *ngIf="result.length > 0" class="table-fixed m-auto mt-5">

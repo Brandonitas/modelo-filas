@@ -40,6 +40,8 @@ export class MmskComponent implements OnInit {
   public pW : any;
   public pWQueue: any;
 
+  public isActive = false;
+
   mmsk = (lambda, mu, s, k) =>{
       this.cleanData();
       lambda = parseFloat(lambda);
@@ -99,9 +101,10 @@ export class MmskComponent implements OnInit {
   clickButton(lambda, mu, s, k, n, t){
 
     //Validar que no esten vacios inputs
+    this.isActive = true;
 
     this.mmsk(lambda, mu, s, k);
-    
+
     if(n != ''){
       this.mmsnk(lambda, mu, n, s, k);
       console.log("ENTRE A N")

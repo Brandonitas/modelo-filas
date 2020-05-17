@@ -41,6 +41,8 @@ export class MmsComponent implements OnInit {
   public pW : any;
   public pWQueue: any;
 
+  public isActive = false;
+
   mms = (lambda, mu, s) =>{
       this.cleanData();
       lambda = parseFloat(lambda);
@@ -101,7 +103,8 @@ export class MmsComponent implements OnInit {
   clickButton(lambda, mu, s, n, t){
 
     //Validar que no esten vacios inputs
-
+    this.isActive = true;
+    
     this.mms(lambda, mu, s);
     if(n != ''){
       this.mmsn(lambda, mu, n, s);
