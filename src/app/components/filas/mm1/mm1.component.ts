@@ -30,8 +30,6 @@ export class Mm1Component implements OnInit {
   }
 
   public calcService = new FilasService();
-
-    // Ubicar en ts de mm1.
   public rho: any;
   public p0: any;
   public w: any;
@@ -42,38 +40,48 @@ export class Mm1Component implements OnInit {
   public pW : any;
   public pWQueue: any;
   
-
   mm1 = (lambda, mu) =>{
       this.cleanData();
       lambda = parseFloat(lambda);
       mu = parseFloat(mu);
       this.rho = this.calcService.calcularRho(lambda, mu, 1, 0, 1);
-      //this.p0 = this.calcService.calcularP0(this.rho, 1, 0, 1);
+      this.p0 = this.calcService.calcularP0(lambda,mu,this.rho, 1, 0, 1);
       this.l = this.calcService.calcularL(lambda, mu, this.p0, 1, 0, 1);
       this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, 1, 0, 1);
       this.w = this.calcService.calcularW(lambda, mu, this.p0, 1, 0, 1);
       this.wQueue = this.calcService.calcularWQueue(lambda, mu, this.p0, 1, 0, 1);
   }
-
+  
   mm1n = (lambda, mu, n) =>{
       this.cleanData();
       lambda = parseFloat(lambda);
       mu = parseFloat(mu);
       n = parseInt(n);
+      this.rho = this.calcService.calcularRho(lambda, mu, 1, 0, 1);
+      this.p0 = this.calcService.calcularP0(lambda,mu,this.rho, 1, 0, 1);
+      this.l = this.calcService.calcularL(lambda, mu, this.p0, 1, 0, 1);
+      this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, 1, 0, 1);
+      this.w = this.calcService.calcularW(lambda, mu, this.p0, 1, 0, 1);
+      this.wQueue = this.calcService.calcularWQueue(lambda, mu, this.p0, 1, 0, 1);
       this.pN = this.calcService.calcularPN(lambda, mu, n, this.p0, 1, 0, 1);
   }
-
-  mm1pW = (lambda, mu, t) =>{
+  
+  mm1pW = (lambda, mu, t,n) =>{
       this.cleanData();
       lambda = parseFloat(lambda);
       mu = parseFloat(mu);
       t = parseInt(t);
       this.rho = this.calcService.calcularRho(lambda, mu, 1, 0, 1);
-      //this.p0 = this.calcService.calcularP0(this.rho, 1, 0, 1);
+      this.p0 = this.calcService.calcularP0(lambda,mu,this.rho, 1, 0, 1);
+      this.l = this.calcService.calcularL(lambda, mu, this.p0, 1, 0, 1);
+      this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, 1, 0, 1);
+      this.w = this.calcService.calcularW(lambda, mu, this.p0, 1, 0, 1);
+      this.wQueue = this.calcService.calcularWQueue(lambda, mu, this.p0, 1, 0, 1);
       this.pW = this.calcService.calcularPW(lambda, mu, this.p0, this.rho, 1, t);
+      this.pN = this.calcService.calcularPN(lambda, mu, n, this.p0, 1, 0, 1);
       this.pWQueue = this.calcService.calcularPWQueue(lambda, mu, this.p0, this.rho, 1, t);
   }
-
+  
   cleanData(){
       this.rho = 0;
       this.p0 = 0;
@@ -86,4 +94,19 @@ export class Mm1Component implements OnInit {
       this.pWQueue = 0;
   }
 
+  clickButton(lambda, mu, n, t){
+
+    //Validar que no esten vacios inputs
+
+    this.mm1(lambda, mu);
+    if(n != ''){
+      this.mm1n(lambda, mu, n);
+      console.log("ENTRE A N")
+    }
+    if(t != ''){
+      this.mm1pW(lambda, mu, t, n);
+      console.log("ENTRE A T")
+    }
+
+  }
 }

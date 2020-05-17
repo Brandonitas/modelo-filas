@@ -11,31 +11,75 @@
         <mat-label>Mu</mat-label>
         <input matInput #mu>
       </mat-form-field>
+
+      <span>Número de servidores:</span>
+      <mat-form-field appearance="outline" class="input w-1/2" style="display: block !important;">
+        <mat-label>S</mat-label>
+        <input matInput #s>
+      </mat-form-field>
+
+      <span>Probabilidad de que haya N personas en el sistema y en la cola:</span>
+      <mat-form-field appearance="outline" class="input w-1/2" style="display: block !important;">
+        <mat-label>N</mat-label>
+        <input matInput #n>
+      </mat-form-field>
+
+      <span>Probiabilidad de que haya una persona en el tiempo T en el sistema y en la cola:</span>
+      <span>(Recuerda poner el tiempo en la misma unidad que Lambda y Mu)</span>
+      <mat-form-field appearance="outline" class="input w-1/2" style="display: block !important;">
+        <mat-label>T</mat-label>
+        <input matInput #t>
+      </mat-form-field>
+
       <div class="flex">         
-        <button class="h-10 w-1/2 btn-generate" mat-raised-button>SIMULAR</button>
+        <button (click)="clickButton(lambda.value, mu.value, s.value, n.value, t.value)" class="h-10 w-1/2 btn-generate" mat-raised-button>SIMULAR</button>
       </div>
     </div>
     
 
     <div>
-      <!--TABLE-->
-      <!--
-      <table *ngIf="result.length > 0" class="table-fixed m-auto mt-5">
-          <thead>
-            <tr>
-              <th class="w-1/4 px-4 py-2">Semilla</th>
-              <th class="w-1/4 px-4 py-2">No. Aleatorio</th>
-              <th class="w-1/4 px-4 py-2">Random Ri</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let number of result; let i = index" @fadeIn>
-            <tr>
-              <td class="border px-4 py-2">X{{i}} = {{semilla[i]}}</td>
-              <td class="border px-4 py-2">X{{i+1}} = {{random[i]}}</td>
-              <td class="border px-4 py-2">R{{i+1}} = {{number}}</td>
-            </tr>
-          </tbody>
-        </table>-->
+      <table class="table-fixed m-auto">
+        <thead>
+          <tr>
+            <th class="w-1/6 px-4 py-2">Rho</th>
+            <th class="w-1/6 px-4 py-2">Po</th>
+            <th class="w-1/6 px-4 py-2">L</th>
+            <th class="w-1/6 px-4 py-2">Lq</th>
+            <th class="w-1/6 px-4 py-2">W</th>
+            <th class="w-1/6 px-4 py-2">Wq</th>
+          </tr>
+        </thead>
+        <tbody @fadeIn>
+          <tr>
+            <td class="border px-4 py-2">{{rho}}</td>
+            <td class="border px-4 py-2">{{p0}}</td>
+            <td class="border px-4 py-2">{{l}}</td>
+            <td class="border px-4 py-2">{{lQueue}}</td>
+            <td class="border px-4 py-2">{{w}}</td>
+            <td class="border px-4 py-2">{{wQueue}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table-fixed m-auto">
+        <thead>
+          <tr>
+            <th class="w-1/3 px-4 py-2">pN</th>
+            <th class="w-1/3 px-4 py-2">pW</th>
+            <th class="w-1/3 px-4 py-2">pWQueue</th>
+        
+          </tr>
+        </thead>
+        <tbody @fadeIn>
+          <tr>
+            <td class="border px-4 py-2">{{pN}}</td>
+            <td class="border px-4 py-2">{{pW}}</td>
+            <td class="border px-4 py-2">{{pWQueue}}</td>
+       
+          </tr>
+        </tbody>
+      </table>
+
   
     </div>
   </div>
