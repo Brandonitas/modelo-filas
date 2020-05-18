@@ -95,11 +95,12 @@
     </div>
 
       <div class="flex">         
-        <button (click)="mg1(lambda.value, mu.value)" class="h-10 w-full btn-generate" mat-raised-button>SIMULAR</button>
+        <button (click)="clickButton(lambda.value, mu.value)" class="h-10 w-full btn-generate" mat-raised-button>SIMULAR</button>
       </div>
 
     </div>
-    <table class="table-fixed m-auto" @fadeIn>
+    <div class="col-span-3">
+    <table *ngIf="isActive" class="table-fixed m-auto" @fadeIn>
       <thead>
         <tr>
           <th class="w-1/6 px-4 py-2">Rho</th>
@@ -121,5 +122,6 @@
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
   </div>

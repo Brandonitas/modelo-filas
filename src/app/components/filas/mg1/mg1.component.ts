@@ -53,6 +53,8 @@ export class Mg1Component implements OnInit {
   public valorK : any;
   public valorSigma : any;
 
+  public isActive = false;
+
   mg1 = (lambda, mu) => {
     this.rho = lambda/ mu;
     this.p0  = this.calcService.calcularP0(lambda, mu,  (lambda/mu), 1, 0, 1);
@@ -136,4 +138,14 @@ export class Mg1Component implements OnInit {
       }
     }
   }
+
+  clickButton(lambda, mu){
+
+    //Validar que no esten vacios inputs
+    this.isActive = true;
+
+    this.mg1(Number(lambda), Number(mu));
+
+  }
+
 }
