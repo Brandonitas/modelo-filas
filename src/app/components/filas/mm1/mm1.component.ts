@@ -9,6 +9,9 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { Label } from 'ng2-charts';
 @Component({
   selector: 'app-mm1',
   templateUrl: './mm1.component.html',
@@ -43,6 +46,26 @@ export class Mm1Component implements OnInit {
   public pNA: any = [];
   public pNM: any = [];
 
+    //Chart Options
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = [];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [pluginDataLabels];
+  public barChartData: ChartDataSets[] = [
+    { data: [], label: 'Pi' }
+  ];
+
   public isActive = false;
   
   mm1 = (lambda, mu) =>{
@@ -51,6 +74,11 @@ export class Mm1Component implements OnInit {
       mu = parseFloat(mu);
       this.rho = this.calcService.calcularRho(lambda, mu, 1, 0, 1);
       this.p0 = this.calcService.calcularP0(lambda,mu,this.rho, 1, 0, 1);
+
+      //Chart P0 push
+      this.barChartData[0].data.push(this.p0);
+      this.barChartLabels.push("P0");
+
       this.l = this.calcService.calcularL(lambda, mu, this.p0, 1, 0, 1);
       this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, 1, 0, 1);
       this.w = this.calcService.calcularW(lambda, mu, this.p0, 1, 0, 1);
@@ -64,6 +92,11 @@ export class Mm1Component implements OnInit {
       n = parseInt(n);
       this.rho = this.calcService.calcularRho(lambda, mu, 1, 0, 1);
       this.p0 = this.calcService.calcularP0(lambda,mu,this.rho, 1, 0, 1);
+
+      //Chart P0 push
+      this.barChartData[0].data.push(this.p0);
+      this.barChartLabels.push("P0");
+
       this.l = this.calcService.calcularL(lambda, mu, this.p0, 1, 0, 1);
       this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, 1, 0, 1);
       this.w = this.calcService.calcularW(lambda, mu, this.p0, 1, 0, 1);
@@ -76,6 +109,13 @@ export class Mm1Component implements OnInit {
       this.pNA = this.convert(this.pNA);
       this.pNM = this.convert(this.pNM);
       }
+
+      //Chart Pn push
+      for (let n = 0; n < this.pNI.length; n++) {
+        this.barChartData[0].data.push(this.pNI[n]);
+        var labl = "P" + (n+1);
+        this.barChartLabels.push(labl);
+      }
    
   }
   
@@ -86,6 +126,11 @@ export class Mm1Component implements OnInit {
       t = parseInt(t);
       this.rho = this.calcService.calcularRho(lambda, mu, 1, 0, 1);
       this.p0 = this.calcService.calcularP0(lambda,mu,this.rho, 1, 0, 1);
+
+      //Chart P0 push
+      this.barChartData[0].data.push(this.p0);
+      this.barChartLabels.push("P0");
+
       this.l = this.calcService.calcularL(lambda, mu, this.p0, 1, 0, 1);
       this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, 1, 0, 1);
       this.w = this.calcService.calcularW(lambda, mu, this.p0, 1, 0, 1);
@@ -100,6 +145,13 @@ export class Mm1Component implements OnInit {
       this.pNM = this.convert(this.pNM);
       }
       this.pWQueue = this.calcService.calcularPWQueue(lambda, mu, this.p0, this.rho, 1, t);
+
+      //Chart Pn push
+      for (let n = 0; n < this.pNI.length; n++) {
+        this.barChartData[0].data.push(this.pNI[n]);
+        var labl = "P" + (n+1);
+        this.barChartLabels.push(labl);
+      }
   
   }
   
@@ -116,6 +168,8 @@ export class Mm1Component implements OnInit {
       this.pNI = [];
       this.pNA = [];
       this.pNM = [];
+      this.barChartData[0].data = [];
+      this.barChartLabels = [];
   }
 
   clickButton(lambda, mu, n, t){

@@ -43,6 +43,10 @@ import { MatAutocompleteModule, MatDatepickerModule,
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
+//Charts
+import { ChartsModule } from 'ng2-charts';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +88,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    MatStepperModule
+    MatStepperModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

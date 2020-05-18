@@ -9,6 +9,9 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-mms',
@@ -44,6 +47,26 @@ export class MmsComponent implements OnInit {
   public pNA: any = [];
   public pNM: any = [];
 
+  //Chart Options
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = [];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [pluginDataLabels];
+  public barChartData: ChartDataSets[] = [
+    { data: [], label: 'Pi' }
+  ];
+
   public isActive = false;
 
   mms = (lambda, mu, s) =>{
@@ -53,6 +76,11 @@ export class MmsComponent implements OnInit {
       s = parseInt(s);
       this.rho = this.calcService.calcularRho(lambda, mu, s, 0, 2);
       this.p0 = this.calcService.calcularP0(lambda, mu,this.rho, s, 0, 2);
+
+      //Chart P0 push
+      this.barChartData[0].data.push(this.p0);
+      this.barChartLabels.push("P0");
+
       this.l = this.calcService.calcularL(lambda, mu, this.p0, s, 0, 2);
       this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, s, 0, 2);
       this.w = this.calcService.calcularW(lambda, mu, this.p0, s, 0, 2);
@@ -67,6 +95,11 @@ export class MmsComponent implements OnInit {
       s = parseInt(s);
       this.rho = this.calcService.calcularRho(lambda, mu, s, 0, 2);
       this.p0 = this.calcService.calcularP0(lambda, mu,this.rho, s, 0, 2);
+
+      //Chart P0 push
+      this.barChartData[0].data.push(this.p0);
+      this.barChartLabels.push("P0");
+
       this.l = this.calcService.calcularL(lambda, mu, this.p0, s, 0, 2);
       this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, s, 0, 2);
       this.w = this.calcService.calcularW(lambda, mu, this.p0, s, 0, 2);
@@ -79,6 +112,13 @@ export class MmsComponent implements OnInit {
         this.pNA = this.convert(this.pNA);
         this.pNM = this.convert(this.pNM);
         }
+
+      //Chart Pn push
+      for (let n = 0; n < this.pNI.length; n++) {
+        this.barChartData[0].data.push(this.pNI[n]);
+        var labl = "P" + (n+1);
+        this.barChartLabels.push(labl);
+      }
   }
 
   mmspW = (lambda, mu, s, t, n) =>{
@@ -89,6 +129,11 @@ export class MmsComponent implements OnInit {
       t = parseInt(t);
       this.rho = this.calcService.calcularRho(lambda, mu, s, 0, 2);
       this.p0 = this.calcService.calcularP0(lambda, mu,this.rho, s, 0, 2);
+
+      //Chart P0 push
+      this.barChartData[0].data.push(this.p0);
+      this.barChartLabels.push("P0");
+
       this.l = this.calcService.calcularL(lambda, mu, this.p0, s, 0, 2);
       this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, s, 0, 2);
       this.w = this.calcService.calcularW(lambda, mu, this.p0, s, 0, 2);
@@ -103,6 +148,13 @@ export class MmsComponent implements OnInit {
         }
       this.pW = this.calcService.calcularPW(lambda, mu, this.p0, this.rho, s, t);
       this.pWQueue = this.calcService.calcularPWQueue(lambda, mu, this.p0, this.rho, s, t);
+
+      //Chart Pn push
+      for (let n = 0; n < this.pNI.length; n++) {
+        this.barChartData[0].data.push(this.pNI[n]);
+        var labl = "P" + (n+1);
+        this.barChartLabels.push(labl);
+      }
   }
 
   cleanData(){
@@ -118,6 +170,8 @@ export class MmsComponent implements OnInit {
     this.pNI = [];
     this.pNA = [];
     this.pNM = [];
+    this.barChartData[0].data = [];
+    this.barChartLabels = [];
   }
 
   clickButton(lambda, mu, s, n, t){
