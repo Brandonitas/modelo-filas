@@ -39,6 +39,9 @@ export class Mm1Component implements OnInit {
   public pN: any;
   public pW : any;
   public pWQueue: any;
+  public pNI: any = [];
+  public pNA: any = [];
+  public pNM: any = [];
 
   public isActive = false;
   
@@ -66,6 +69,14 @@ export class Mm1Component implements OnInit {
       this.w = this.calcService.calcularW(lambda, mu, this.p0, 1, 0, 1);
       this.wQueue = this.calcService.calcularWQueue(lambda, mu, this.p0, 1, 0, 1);
       this.pN = this.calcService.calcularPN(lambda, mu, n, this.p0, 1, 0, 1);
+      if(n>0){
+      this.pNI = this.calcService.calcularPNIndividualArreglo(lambda, mu, n, this.pNI, this.p0, 1, 0, 1);
+      this.pNA = this.calcService.calcularPNAcumuladaArreglo(lambda, mu, n, this.pNA, this.pNI, this.p0, 1, 0, 1);
+      this.pNM = this.calcService.calcularPNMayorArreglo(lambda, mu, n, this.pNM, this.pNA, this.p0, 1, 0, 1);
+      this.pNA = this.convert(this.pNA);
+      this.pNM = this.convert(this.pNM);
+      }
+   
   }
   
   mm1pW = (lambda, mu, t,n) =>{
@@ -81,7 +92,15 @@ export class Mm1Component implements OnInit {
       this.wQueue = this.calcService.calcularWQueue(lambda, mu, this.p0, 1, 0, 1);
       this.pW = this.calcService.calcularPW(lambda, mu, this.p0, this.rho, 1, t);
       this.pN = this.calcService.calcularPN(lambda, mu, n, this.p0, 1, 0, 1);
+      if(n>0){
+      this.pNI = this.calcService.calcularPNIndividualArreglo(lambda, mu, n, this.pNI, this.p0, 1, 0, 1);
+      this.pNA = this.calcService.calcularPNAcumuladaArreglo(lambda, mu, n, this.pNA, this.pNI, this.p0, 1, 0, 1);
+      this.pNM = this.calcService.calcularPNMayorArreglo(lambda, mu, n, this.pNM, this.pNA, this.p0, 1, 0, 1);
+      this.pNA = this.convert(this.pNA);
+      this.pNM = this.convert(this.pNM);
+      }
       this.pWQueue = this.calcService.calcularPWQueue(lambda, mu, this.p0, this.rho, 1, t);
+  
   }
   
   cleanData(){
@@ -94,6 +113,9 @@ export class Mm1Component implements OnInit {
       this.pN = 0;
       this.pW = 0;
       this.pWQueue = 0;
+      this.pNI = [];
+      this.pNA = [];
+      this.pNM = [];
   }
 
   clickButton(lambda, mu, n, t){
@@ -111,5 +133,15 @@ export class Mm1Component implements OnInit {
       console.log("ENTRE A T")
     }
 
+    console.log(this.pNA);
+
+  }
+
+  convert(arr){
+    let newArr =[];
+    for(var i=0; i<arr.length; i++){
+        newArr.push(arr[i].toFixed(4));
+    }
+    return newArr;
   }
 }

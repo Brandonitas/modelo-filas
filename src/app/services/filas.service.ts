@@ -77,7 +77,7 @@ export class FilasService {
                       let a = Math.pow((lambda/mu),n);
                       let b = math.factorial(n);
                       return Number((a/b)*p0).toFixed(4);
-                  }else if (n > s && n <= k){
+                  }else if (n >= s && n <= k){
                       let a = Math.pow((lambda/mu),n);
                       let b = math.factorial(s)*Math.pow((s), n-s);
                       return Number((a/b)*p0).toFixed(4);
@@ -87,6 +87,113 @@ export class FilasService {
                   break;
           }
       }
+        calcularPNIndividualArreglo(lambda:number, mu:number, n:number, pNI:any, p0:number, s:number, k:number , j:number){
+           console.log("Entre a Individual");
+            switch(j){
+                case 1:
+                    for(let i = 1; i <= n; i++){
+                        pNI.push(Number((1-(lambda/mu))*Math.pow((lambda/mu),i)).toFixed(4));
+                    }
+                    return pNI;
+                    break;
+                case 2:
+                    for(let i = 1; i <= n; i++){
+                        if(i>= 0 && i < s){
+                            let a = Math.pow((lambda/mu),i);
+                            let b = math.factorial(i);
+                            pNI.push(Number((a/b)*p0).toFixed(4));
+                        }else{
+                            let a = Math.pow((lambda/mu),i);
+                            let b = math.factorial(s)*Math.pow((s), i-s);
+                            pNI.push(Number((a/b)*p0).toFixed(4));
+                        }
+                    }
+                    return pNI;
+                    break;
+                case 3:
+                    for(let i = 1; i <= n; i++){
+                        if(i> 0 && i < s){
+                            let a = Math.pow((lambda/mu),i);
+                            let b = math.factorial(i);
+                            pNI.push(Number((a/b)*p0).toFixed(4));
+                        }else if (i >= s && i <= k){
+                            let a = Math.pow((lambda/mu),i);
+                            let b = math.factorial(s)*Math.pow((s), i-s);
+                            pNI.push(Number((a/b)*p0).toFixed(4));
+                        }else{
+                            pNI.push(0);
+                        }
+                    }
+                    return pNI;
+                    break;
+            }
+        }
+
+        calcularPNAcumuladaArreglo(lambda:number, mu:number, n:number, pNA:number[], pNI: number[], p0:number, s:number, k:number , j:number){
+            switch(j){
+                case 1:
+                    for(let i = 0; i <n; i++){
+                        if(i == 0){
+                           pNA.push(Number(pNI[i])+Number(this.calcularP0(lambda, mu, (lambda/mu),1, 0, 1)));
+                        }else if(i == n-1){
+                            pNA.push(Number(this.calcularPN(lambda, mu, n, p0, 1, 0, 1))+Number(pNA[i-1]));
+                        }else{
+                            pNA.push(Number(pNI[i+1])+Number(pNA[i-1]));
+                        }
+                    }
+                    return pNA;
+                    break;
+                case 2:
+                    for(let i = 0; i <n; i++){
+                        if(i == 0){
+                           pNA.push(Number(pNI[i])+Number(this.calcularP0(lambda, mu, (lambda/mu),s, 0, 2)));
+                        }else if(i == n-1){
+                            pNA.push(Number(this.calcularPN(lambda, mu, n, p0, s, 0, 2))+Number(pNA[i-1]));
+                        }else{
+                            pNA.push(Number(pNI[i+1])+Number(pNA[i-1]));
+                        }
+                    }
+                    return pNA;
+                    break;
+                case 3:
+                    for(let i = 0; i <n; i++){
+                        if(i == 0){
+                           pNA.push(Number(pNI[i])+Number(this.calcularP0(lambda, mu, (lambda/mu),s, k, 3)));
+                        }else if(i == n-1){
+                            pNA.push(Number(this.calcularPN(lambda, mu, n, p0, s, k, 3))+Number(pNA[i-1]));
+                        }else{
+                            pNA.push(Number(pNI[i+1])+Number(pNA[i-1]));
+                        }
+                    }
+                    return pNA;
+                    return pNA;
+                    break;
+            }
+        }
+
+        calcularPNMayorArreglo(lambda:number, mu:number, n:number, pNM:number[], pNA: number[], p0:number, s:number, k:number , j:number){
+            switch(j){
+                case 1:
+                    for(let i = 1; i <= n; i++){
+                        pNM.push(1-pNA[i-1]);
+                    }
+                    return pNM;
+                    break;
+                case 2:
+                    for(let i = 1; i <= n; i++){
+                        pNM.push(1-pNA[i-1]);
+                    }
+                    return pNM;
+                    break;
+                case 3:
+                    for(let i = 1; i <= n; i++){
+                        pNM.push(1-pNA[i-1]);
+                    }
+                    return pNM;
+                    break;
+            }
+        }
+
       calcularL(lambda:number, mu:number, p0:number, s:number, k:number, j:number){
           switch(j){
               case 1:
