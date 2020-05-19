@@ -110,7 +110,19 @@
           </tr>
         </tbody>
       </table>
+      <br/>
+      <br/>
   
     </div>
+
+    <canvas *ngIf="pNI.length > 0" baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType"
+      >
+    </canvas>
   </div>
   </div>
