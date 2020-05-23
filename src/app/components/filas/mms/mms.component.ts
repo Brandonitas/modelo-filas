@@ -46,6 +46,9 @@ export class MmsComponent implements OnInit {
   public pNI: any = [];
   public pNA: any = [];
   public pNM: any = [];
+  public recomendaciones: any = [];
+  public costo: number = 0;
+  public isCheckedRecomendaciones = false;
 
   //Chart Options
   public barChartOptions: ChartOptions = {
@@ -85,6 +88,7 @@ export class MmsComponent implements OnInit {
       this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, s, 0, 2);
       this.w = this.calcService.calcularW(lambda, mu, this.p0, s, 0, 2);
       this.wQueue = this.calcService.calcularWQueue(lambda, mu, this.p0, s, 0, 2);
+
   }
 
   mmsn = (lambda, mu, n, s) =>{
@@ -174,8 +178,19 @@ export class MmsComponent implements OnInit {
     this.barChartLabels = [];
   }
 
-  clickButton(lambda, mu, s, n, t){
+  generarRecomendaciones(lambda,mu, Cq, Cs){
+      this.recomendaciones= this.calcService.generarRecomentaciones(lambda, mu, Cq, Cs);
+      console.log("RECOMENDACIONES", this.recomendaciones[0]);
+  }
 
+  calcCosto(lambda, mu, s, Cq,Cs){
+    this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, s, 0, 2);
+    this.costo = this.calcService.calcularCosto(this.lQueue, Cq, s, Cs);
+  }
+  
+
+  clickButton(lambda, mu, s, n, t, Cq, Cs){
+ 
     //Validar que no esten vacios inputs
     this.isActive = true;
     
@@ -187,6 +202,14 @@ export class MmsComponent implements OnInit {
     if(t != ''){
       this.mmspW(lambda, mu, s, t ,n);
       console.log("ENTRE A T")
+    }
+
+    if(Cq != '' && Cs != ''){
+      this.calcCosto(lambda, mu, s, Cq,Cs);
+    }
+
+    if(this.isCheckedRecomendaciones){
+      this.generarRecomendaciones(lambda,mu, Cq, Cs);
     }
 
   }

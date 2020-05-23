@@ -46,6 +46,8 @@ export class MmskComponent implements OnInit {
   public pNA: any = [];
   public pNM: any = [];
 
+  public costo: number = 0;
+
   //Chart Options
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -155,6 +157,10 @@ export class MmskComponent implements OnInit {
       }
   }
 
+  calcCosto(lambda, mu, s, k, Cq,Cs){
+    this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, s, k, 3);
+    this.costo = this.calcService.calcularCosto(this.lQueue, Cq, s, Cs);
+  }
 
 
   cleanData(){
@@ -174,7 +180,7 @@ export class MmskComponent implements OnInit {
     this.barChartLabels = [];
   }
 
-  clickButton(lambda, mu, s, k, n, t){
+  clickButton(lambda, mu, s, k, n, t, Cq, Cs){
 
     //Validar que no esten vacios inputs
     this.isActive = true;
@@ -188,6 +194,11 @@ export class MmskComponent implements OnInit {
     if(t != ''){
       this.mmskpW(lambda, mu, n,  s, k ,t);
       console.log("ENTRE A T")
+    }
+
+
+    if(Cq != '' && Cs != ''){
+      this.calcCosto(lambda, mu, s, k, Cq,Cs);
     }
 
   }

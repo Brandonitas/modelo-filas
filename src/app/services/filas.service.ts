@@ -280,5 +280,37 @@ export class FilasService {
           let c = math.factorial(s)*(1-rho);
           return Number(a*(b/c)).toFixed(4);
       }
+
+      
+
+      generarRecomentaciones(lambda:number, mu:number, Cq:number, Cs:number){
+        var array = [];
+        var objeto1 = {
+
+        }
+        
+        for(var i= 1; i< 100; i++){
+          var rho = this.calcularRho(lambda, mu, i, 0, 2);
+          var p0 = this.calcularP0(lambda, mu, rho, i, 0, 2);
+          var Lq = this.calcularLQueue(lambda, mu, p0, i, 0, 2);
+          var costoTotal = this.calcularCosto(Lq, Cq, i, Cs);
+
+          objeto1[costoTotal] = i
+          
+          array.push(costoTotal);
+        }
+        math.sort(array);
+        console.log("TODO", objeto1);
+        console.log("1",objeto1[array[0]]);
+        console.log("2",objeto1[array[1]]);
+        console.log("3",objeto1[array[2]]);
+        
+        var recs = objeto1;
+        return recs; 
+      }
+
+      calcularCosto(Lq, Cq, S, Cs){
+        return Number(Number((Lq*Cq)+(S*Cs)).toFixed(4));
+      }
     
 }

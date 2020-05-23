@@ -13,7 +13,7 @@
       </mat-form-field>
 
       <mat-icon>person</mat-icon>
-      <span class="text-sm">Probabilidad de que Haya n Personas en el Sistema:</span>
+      <span class="text-sm">Probabilidad de que haya n Personas en el Sistema:</span>
       <mat-form-field appearance="outline" class="input w-full" style="display: block !important;">
         <mat-label>N</mat-label>
         <input matInput #n>
@@ -21,21 +21,40 @@
 
       
       <mat-icon>alarm</mat-icon>
-      <span class="text-sm">Probabilidad de que una Persona permanezca más de t tiempo (recuerda poner el tiempo en la misma unidad que Lambda y Mu):</span>
+      <span class="text-sm">Probabilidad de que una persona permanezca más de t tiempo (recuerda poner el tiempo en la misma unidad que Lambda y Mu):</span>
       
       <mat-form-field appearance="outline" class="input w-full" style="display: block !important;">
         <mat-label>T</mat-label>
         <input matInput #t>
       </mat-form-field>
 
+      <mat-icon>attach_money</mat-icon>
+      <span class="text-sm">Costo de mantener a un cliente esperando en fila:</span>
+      
+      <mat-form-field appearance="outline" class="input w-full" style="display: block !important;">
+        <mat-label>Cq</mat-label>
+        <input matInput #Cq>
+      </mat-form-field>
+
+      <mat-icon>attach_money</mat-icon>
+      <span class="text-sm">Costo por unidad de trabajo:</span>
+      
+      <mat-form-field appearance="outline" class="input w-full" style="display: block !important;">
+        <mat-label>Cs</mat-label>
+        <input matInput #Cs>
+      </mat-form-field>      
+
       <div class="flex">         
-        <button (click)="clickButton(lambda.value, mu.value, n.value, t.value)" class="h-10 w-full btn-generate" mat-raised-button>SIMULAR</button>
+        <button (click)="clickButton(lambda.value, mu.value, n.value, t.value, Cq.value, Cs.value)" class="h-10 w-full btn-generate" mat-raised-button>SIMULAR</button>
       </div>
     </div>
     
 
     <div class="col-span-3">
       <!--TABLE-->
+      <div *ngIf="costo>0" class="text-center text-xl mb-10">
+        <span>Costo total: </span><span class="text-teal-600">$</span><span>{{costo}}</span>
+      </div>
       
       <table *ngIf="isActive" class="table-fixed m-auto" @fadeIn>
           <thead>

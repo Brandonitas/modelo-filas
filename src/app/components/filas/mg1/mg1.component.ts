@@ -90,6 +90,12 @@ export class Mg1Component implements OnInit {
     if(text === 'weibull'){
       if($event.checked == true){
         this.validWeibull = true;
+        
+        this.validUniforme = false;
+        this.validBinomial = false;
+        this.validExpNeg = false;
+        this.validErklangK = false;
+        this.validNormal = false;
       }else{
         this.validWeibull = false;
         this.valorAlfa  = null;
@@ -99,6 +105,13 @@ export class Mg1Component implements OnInit {
     if(text === 'uniforme'){
       if($event.checked == true){
         this.validUniforme = true;
+
+        this.validWeibull = false;
+        this.validBinomial = false;
+        this.validExpNeg = false;
+        this.validErklangK = false;
+        this.validNormal = false;
+
       }else{
         this.validUniforme = false;
         this.valorA = null;
@@ -108,6 +121,12 @@ export class Mg1Component implements OnInit {
     if(text === 'binomial'){
       if($event.checked == true){
         this.validBinomial = true;
+
+        this.validWeibull = false;
+        this.validUniforme = false;
+        this.validExpNeg = false;
+        this.validErklangK = false;
+        this.validNormal = false;
       }else{
         this.validBinomial = false;
         this.valornBin = null;
@@ -117,6 +136,12 @@ export class Mg1Component implements OnInit {
     if(text === 'exponencialNegativa'){
       if($event.checked == true){
         this.validExpNeg = true;
+
+        this.validWeibull = false;
+        this.validUniforme = false;
+        this.validBinomial = false;
+        this.validErklangK = false;
+        this.validNormal = false;
       }else{
         this.validExpNeg= false;
       }
@@ -124,6 +149,12 @@ export class Mg1Component implements OnInit {
     if(text === 'erklangK'){
       if($event.checked == true){
         this.validErklangK = true;
+
+        this.validWeibull = false;
+        this.validUniforme = false;
+        this.validBinomial = false;
+        this.validExpNeg = false;
+        this.validNormal = false;
       }else{
         this.validErklangK= false;
         this.valorK = null;
@@ -132,6 +163,12 @@ export class Mg1Component implements OnInit {
     if(text === 'normal'){
       if($event.checked == true){
         this.validNormal = true;
+
+        this.validWeibull = false;
+        this.validUniforme = false;
+        this.validBinomial = false;
+        this.validExpNeg = false;
+        this.validErklangK = false;
       }else{
         this.validNormal= false;
         this.valorSigma = null;
@@ -147,5 +184,7 @@ export class Mg1Component implements OnInit {
     this.mg1(Number(lambda), Number(mu));
 
   }
+
+ 
 
 }

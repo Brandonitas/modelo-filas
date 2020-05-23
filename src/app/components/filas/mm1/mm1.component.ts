@@ -45,6 +45,7 @@ export class Mm1Component implements OnInit {
   public pNI: any = [];
   public pNA: any = [];
   public pNM: any = [];
+  public costo: number = 0;
 
     //Chart Options
   public barChartOptions: ChartOptions = {
@@ -154,6 +155,11 @@ export class Mm1Component implements OnInit {
       }
   
   }
+
+  calcCosto(lambda, mu, Cq,Cs){
+    this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, 1, 0, 1);
+    this.costo = this.calcService.calcularCosto(this.lQueue, Cq, 1, Cs);
+  }
   
   cleanData(){
       this.rho = 0;
@@ -172,7 +178,7 @@ export class Mm1Component implements OnInit {
       this.barChartLabels = [];
   }
 
-  clickButton(lambda, mu, n, t){
+  clickButton(lambda, mu, n, t, Cq, Cs){
 
     //Validar que no esten vacios inputs
     this.isActive = true;
@@ -185,6 +191,10 @@ export class Mm1Component implements OnInit {
     if(t != ''){
       this.mm1pW(lambda, mu, t, n);
       console.log("ENTRE A T")
+    }
+
+    if(Cq != '' && Cs != ''){
+      this.calcCosto(lambda, mu, Cq,Cs);
     }
 
     console.log(this.pNA);
