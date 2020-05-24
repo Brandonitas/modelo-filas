@@ -56,7 +56,7 @@ export class Mg1Component implements OnInit {
   public isActive = false;
 
   mg1 = (lambda, mu) => {
-    this.rho = lambda/ mu;
+    this.rho = lambda/mu;
     this.p0  = this.calcService.calcularP0(lambda, mu,  (lambda/mu), 1, 0, 1);
     if(this.validWeibull){
       let a = Math.pow(this.valorAlfa, 2);
@@ -84,6 +84,18 @@ export class Mg1Component implements OnInit {
     this.l = this.rho + this.lQueue;
     this.wQueue = this.lQueue/lambda;
     this.w = this.wQueue + (1/mu);
+
+    //this.rho = this.rho.substring(0,5);
+    this.rho = (this.rho).toFixed(4);
+    this.p0 = Number(this.p0).toFixed(4);
+    this.lQueue = (this.lQueue).toFixed(4);
+    this.l = (this.l).toFixed(4);
+    this.wQueue = (this.wQueue).toFixed(4);
+    this.w = (this.w).toFixed(4);
+
+    console.log("SIGMA", this.sigma);
+
+
   }
 
   onChange($event, text){
@@ -183,6 +195,14 @@ export class Mg1Component implements OnInit {
 
     this.mg1(Number(lambda), Number(mu));
 
+  }
+
+  convert(arr){
+    let newArr =[];
+    for(var i=0; i<arr.length; i++){
+        newArr.push(arr[i].toFixed(4));
+    }
+    return newArr;
   }
 
  

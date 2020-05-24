@@ -49,6 +49,8 @@ export class MmsComponent implements OnInit {
   public recomendaciones: any = [];
   public costo: number = 0;
   public isCheckedRecomendaciones = false;
+  public servidoresRecs: any = [];
+  public costoRecs: any = [];
 
   //Chart Options
   public barChartOptions: ChartOptions = {
@@ -180,12 +182,20 @@ export class MmsComponent implements OnInit {
 
   generarRecomendaciones(lambda,mu, Cq, Cs){
       this.recomendaciones= this.calcService.generarRecomentaciones(lambda, mu, Cq, Cs);
-      console.log("RECOMENDACIONES", this.recomendaciones[0]);
+      this.servidoresRecs[0]= this.recomendaciones[0];
+      this.servidoresRecs[1] = this.recomendaciones[2];
+      this.servidoresRecs[2] = this.recomendaciones[4];
+
+      this.costoRecs[0]= this.recomendaciones[1];
+      this.costoRecs[1]= this.recomendaciones[3];
+      this.costoRecs[2]= this.recomendaciones[5];
+
+      console.log("RECOMENDACIONES", this.recomendaciones[1]);
   }
 
   calcCosto(lambda, mu, s, Cq,Cs){
-    this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, s, 0, 2);
-    this.costo = this.calcService.calcularCosto(this.lQueue, Cq, s, Cs);
+    var lQueueNueva = this.calcService.calcularLQueue(lambda, mu, this.p0, s, 0, 2);
+    this.costo = this.calcService.calcularCosto(lQueueNueva, Cq, s, Cs);
   }
   
 

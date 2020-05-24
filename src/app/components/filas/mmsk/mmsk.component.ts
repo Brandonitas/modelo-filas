@@ -158,8 +158,8 @@ export class MmskComponent implements OnInit {
   }
 
   calcCosto(lambda, mu, s, k, Cq,Cs){
-    this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, s, k, 3);
-    this.costo = this.calcService.calcularCosto(this.lQueue, Cq, s, Cs);
+    var lQueueNueva = this.calcService.calcularLQueue(lambda, mu, this.p0, s, k, 3);
+    this.costo = this.calcService.calcularCosto(lQueueNueva, Cq, s, Cs);
   }
 
 

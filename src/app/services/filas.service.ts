@@ -304,9 +304,10 @@ export class FilasService {
         console.log("1",objeto1[array[0]]);
         console.log("2",objeto1[array[1]]);
         console.log("3",objeto1[array[2]]);
-        
-        var recs = objeto1;
-        return recs; 
+
+        var resultado = [objeto1[array[0]], array[0], objeto1[array[1]], array[1], objeto1[array[2]], array[2]];
+
+        return resultado;
       }
 
       calcularCosto(Lq, Cq, S, Cs){
