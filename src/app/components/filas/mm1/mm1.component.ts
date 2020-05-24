@@ -12,6 +12,8 @@ import {
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+
+
 @Component({
   selector: 'app-mm1',
   templateUrl: './mm1.component.html',
@@ -27,7 +29,8 @@ import { Label } from 'ng2-charts';
 })
 export class Mm1Component implements OnInit {
 
-  constructor() { }
+  constructor(public snackBarSuccess: MatSnackBar,
+    public snackBarError: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -180,7 +183,13 @@ export class Mm1Component implements OnInit {
 
   clickButton(lambda, mu, n, t, Cq, Cs){
 
-    //Validar que no esten vacios inputs
+
+    if(!this.isValid(lambda, mu)){
+      return;
+    }
+
+    this.openSuccessDialog();
+
     this.isActive = true;
     
     this.mm1(lambda, mu);
@@ -208,4 +217,35 @@ export class Mm1Component implements OnInit {
     }
     return newArr;
   }
+
+  openErrorDialog(error){
+    this.snackBarError.open("Error: "+ error, "", {
+      duration: 6000,
+      panelClass: 'error-snackbar'
+    });
+  }
+  
+  openSuccessDialog(){
+    this.snackBarSuccess.open("Simulación generada con éxito", "", {
+      duration: 3000,
+      panelClass: 'success-snackbar',
+      verticalPosition: 'top'
+    });
+  }
+
+
+  isValid(lambda, mu){
+    //Validamos que no vengan vacías 
+  
+    console.log("")
+    if (lambda === '' || mu === '') {
+      this.openErrorDialog('Los datos no deben estar vacíos')
+      return false;
+    }
+  
+    return true;
+    
+  }
+
+  
 }

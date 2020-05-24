@@ -28,7 +28,8 @@ import { Label } from 'ng2-charts';
 })
 export class MmskComponent implements OnInit {
 
-  constructor() { }
+  constructor(public snackBarSuccess: MatSnackBar,
+    public snackBarError: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -182,6 +183,13 @@ export class MmskComponent implements OnInit {
 
   clickButton(lambda, mu, s, k, n, t, Cq, Cs){
 
+     
+    if(!this.isValid(lambda, mu, s, k)){
+      return;
+    }
+
+    this.openSuccessDialog();
+
     //Validar que no esten vacios inputs
     this.isActive = true;
 
@@ -209,6 +217,35 @@ export class MmskComponent implements OnInit {
         newArr.push(arr[i].toFixed(4));
     }
     return newArr;
+  }
+
+  openErrorDialog(error){
+    this.snackBarError.open("Error: "+ error, "", {
+      duration: 6000,
+      panelClass: 'error-snackbar'
+    });
+  }
+  
+  openSuccessDialog(){
+    this.snackBarSuccess.open("Simulación generada con éxito", "", {
+      duration: 3000,
+      panelClass: 'success-snackbar',
+      verticalPosition: 'top'
+    });
+  }
+
+
+  isValid(lambda, mu, s, k){
+    //Validamos que no vengan vacías 
+  
+    console.log("")
+    if (lambda === '' || mu === '' || s==='' || k==='') {
+      this.openErrorDialog('Los datos no deben estar vacíos')
+      return false;
+    }
+  
+    return true;
+    
   }
 
 

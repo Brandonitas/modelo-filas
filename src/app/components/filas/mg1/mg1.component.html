@@ -15,31 +15,12 @@
       <mat-label>Escoge a G:</mat-label>
       
       <div class="grid grid-cols-2 m-5">
-        <mat-checkbox id="mat-checkbox-1" [(ngModel)]="validWeibull" [ngModelOptions]="{standalone: true}" (change)="onChange($event, 'weibull')">Weibull</mat-checkbox>
         <mat-checkbox id="mat-checkbox-2" [(ngModel)]="validUniforme" [ngModelOptions]="{standalone: true}" (change)="onChange($event, 'uniforme')">Uniforme</mat-checkbox>
         <mat-checkbox id="mat-checkbox-5" [(ngModel)]="validErklangK" [ngModelOptions]="{standalone: true}" (change)="onChange($event, 'erklangK')">Erklang K</mat-checkbox>
         <mat-checkbox id="mat-checkbox-6" [(ngModel)]="validNormal" [ngModelOptions]="{standalone: true}" (change)="onChange($event, 'normal')">Normal</mat-checkbox>
         <mat-checkbox id="mat-checkbox-4" [(ngModel)]="validExpNeg" [ngModelOptions]="{standalone: true}" (change)="onChange($event, 'exponencialNegativa')">Exponencial Negativa</mat-checkbox>
+        <mat-checkbox id="mat-checkbox-7" [(ngModel)]="validD" [ngModelOptions]="{standalone: true}" (change)="onChange($event, 'dConstante')">D</mat-checkbox>
       </div>
-
-     <!--Weibull-->
-    <div class="grid grid-cols-1">
-      <mat-icon *ngIf="validWeibull">fullscreen</mat-icon>
-      <mat-label *ngIf="validWeibull">Proporcione el parámetro de escala (α), se recomienda 1:</mat-label>
-      <mat-form-field *ngIf="validWeibull" appearance="outline" class="input block m-2">
-        <mat-label>α</mat-label>
-        <input matInput name="valorAlfa" placeholder="5" value="5" [(ngModel)]="valorAlfa">
-      </mat-form-field>
-      <mat-icon *ngIf="validWeibull">transform</mat-icon>
-      <mat-label *ngIf="validWeibull">Proporcione β, recuerda lo siguiente:</mat-label>
-      <mat-label *ngIf="validWeibull">•Si beta es igual a alfa la salida de clientes parecido a constante</mat-label>
-      <mat-label *ngIf="validWeibull">•Si beta es ligeramente mayor a alfa la salida de clientes es parecida  a una función logarítmica</mat-label>
-      <mat-label *ngIf="validWeibull">•Si beta es notablemente mayor a alfa la salida de clientes es parecida  a una función normal</mat-label>
-      <mat-form-field *ngIf="validWeibull" appearance="outline" class="input block m-2">
-        <mat-label>β</mat-label>
-        <input matInput name="valorBeta" placeholder="5" value="5" [(ngModel)]="valorBeta">
-      </mat-form-field>
-    </div>
 
     <!--Uniforme-->
     <div class="grid grid-cols-1">
@@ -77,6 +58,7 @@
         <input matInput name="valorSigma" placeholder="5" value="5" [(ngModel)]="valorSigma">
       </mat-form-field>
     </div>
+
 
       <div class="flex">         
         <button (click)="clickButton(lambda.value, mu.value)" class="h-10 w-full btn-generate" mat-raised-button>SIMULAR</button>

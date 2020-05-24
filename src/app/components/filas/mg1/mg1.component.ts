@@ -26,7 +26,8 @@ import {
 })
 export class Mg1Component implements OnInit {
 
-  constructor() { }
+  constructor(public snackBarSuccess: MatSnackBar,
+    public snackBarError: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -38,12 +39,12 @@ export class Mg1Component implements OnInit {
   public l: any;
   public lQueue: any;
   public sigma : any;
-  public validWeibull: boolean = false;
   public validUniforme: boolean = false;
   public validBinomial: boolean = false;
   public validExpNeg: boolean = false;
   public validErklangK: boolean = false;
   public validNormal: boolean = false;
+  public validD: boolean = false;
   public valorAlfa : any;
   public valorBeta : any;
   public valorA : any;
@@ -58,17 +59,8 @@ export class Mg1Component implements OnInit {
   mg1 = (lambda, mu) => {
     this.rho = lambda/mu;
     this.p0  = this.calcService.calcularP0(lambda, mu,  (lambda/mu), 1, 0, 1);
-    if(this.validWeibull){
-      let a = Math.pow(this.valorAlfa, 2);
-      let b = math.factorial(Number(2/this.valorBeta).toFixed(0));
-      let c = math.factorial(Number(1/this.valorBeta).toFixed(0));
-      this.sigma = a * (b -  Math.pow(c,2));
-    }
     if(this.validUniforme){
       this.sigma =  Math.pow(this.valorB - this.valorA,2)/12
-    }
-    if(this.validBinomial) {
-      this.sigma = this.valornBin * (this.valorpBin/this.valornBin) * (1-(this.valorpBin/this.valornBin));
     }
     if(this.validExpNeg){
       this.sigma = 1/Math.pow(lambda,2);
@@ -79,6 +71,9 @@ export class Mg1Component implements OnInit {
     }
     if(this.validNormal){
       this.sigma = this.valorSigma;
+    }
+    if(this.validD){
+      this.sigma = 0;
     }
     this.lQueue = (Math.pow(lambda, 2)*this.sigma+Math.pow(this.rho,2))/(2*(1-this.rho));
     this.l = this.rho + this.lQueue;
@@ -99,26 +94,11 @@ export class Mg1Component implements OnInit {
   }
 
   onChange($event, text){
-    if(text === 'weibull'){
-      if($event.checked == true){
-        this.validWeibull = true;
-        
-        this.validUniforme = false;
-        this.validBinomial = false;
-        this.validExpNeg = false;
-        this.validErklangK = false;
-        this.validNormal = false;
-      }else{
-        this.validWeibull = false;
-        this.valorAlfa  = null;
-        this.valorBeta  = null;
-      }
-    }
     if(text === 'uniforme'){
       if($event.checked == true){
         this.validUniforme = true;
 
-        this.validWeibull = false;
+        this.validD = false;
         this.validBinomial = false;
         this.validExpNeg = false;
         this.validErklangK = false;
@@ -130,26 +110,11 @@ export class Mg1Component implements OnInit {
         this.valorB = null;
       }
     }
-    if(text === 'binomial'){
-      if($event.checked == true){
-        this.validBinomial = true;
-
-        this.validWeibull = false;
-        this.validUniforme = false;
-        this.validExpNeg = false;
-        this.validErklangK = false;
-        this.validNormal = false;
-      }else{
-        this.validBinomial = false;
-        this.valornBin = null;
-        this.valorpBin = null;
-      }
-    }
     if(text === 'exponencialNegativa'){
       if($event.checked == true){
         this.validExpNeg = true;
 
-        this.validWeibull = false;
+        this.validD = false;
         this.validUniforme = false;
         this.validBinomial = false;
         this.validErklangK = false;
@@ -162,7 +127,7 @@ export class Mg1Component implements OnInit {
       if($event.checked == true){
         this.validErklangK = true;
 
-        this.validWeibull = false;
+        this.validD = false;
         this.validUniforme = false;
         this.validBinomial = false;
         this.validExpNeg = false;
@@ -176,7 +141,7 @@ export class Mg1Component implements OnInit {
       if($event.checked == true){
         this.validNormal = true;
 
-        this.validWeibull = false;
+        this.validD = false;
         this.validUniforme = false;
         this.validBinomial = false;
         this.validExpNeg = false;
@@ -186,11 +151,30 @@ export class Mg1Component implements OnInit {
         this.valorSigma = null;
       }
     }
+    if(text === 'dConstante'){
+      if($event.checked == true){
+        this.validD = true;
+
+        this.validNormal = false;
+        this.validUniforme = false;
+        this.validBinomial = false;
+        this.validExpNeg = false;
+        this.validErklangK = false;
+      }else{
+        this.validD= false;
+      }
+    }
   }
 
   clickButton(lambda, mu){
 
     //Validar que no esten vacios inputs
+    if(!this.isValid(lambda, mu)){
+      return;
+    }
+
+    this.openSuccessDialog();
+
     this.isActive = true;
 
     this.mg1(Number(lambda), Number(mu));
@@ -203,6 +187,34 @@ export class Mg1Component implements OnInit {
         newArr.push(arr[i].toFixed(4));
     }
     return newArr;
+  }
+
+  openErrorDialog(error){
+    this.snackBarError.open("Error: "+ error, "", {
+      duration: 6000,
+      panelClass: 'error-snackbar'
+    });
+  }
+  
+  openSuccessDialog(){
+    this.snackBarSuccess.open("Simulación generada con éxito", "", {
+      duration: 3000,
+      panelClass: 'success-snackbar',
+      verticalPosition: 'top'
+    });
+  }
+
+  isValid(lambda, mu){
+    //Validamos que no vengan vacías 
+  
+    console.log("")
+    if (lambda === '' || mu === '' ) {
+      this.openErrorDialog('Los datos no deben estar vacíos')
+      return false;
+    }
+  
+    return true;
+    
   }
 
  

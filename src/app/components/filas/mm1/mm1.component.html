@@ -47,6 +47,7 @@
       <div class="flex">         
         <button (click)="clickButton(lambda.value, mu.value, n.value, t.value, Cq.value, Cs.value)" class="h-10 w-full btn-generate" mat-raised-button>SIMULAR</button>
       </div>
+
     </div>
     
 
@@ -79,7 +80,7 @@
           </tbody>
         </table>
 
-        <table *ngIf="isActive" class="table-fixed m-auto mt-10" @fadeIn>
+        <table *ngIf="isActive && pN > 0" class="table-fixed m-auto mt-10" @fadeIn>
           <thead>
             <tr>
               <th class="w-1/3 px-4 py-2">pN</th>
@@ -120,7 +121,7 @@
         <br/>
     </div>
     
-    <canvas *ngIf="pNI.length > 0" baseChart
+    <canvas class="mt-10" *ngIf="pNI.length > 0" baseChart
       [datasets]="barChartData"
       [labels]="barChartLabels"
       [options]="barChartOptions"
