@@ -179,6 +179,7 @@ export class MmsComponent implements OnInit {
     this.pNM = [];
     this.barChartData[0].data = [];
     this.barChartLabels = [];
+    this.costo = 0;
   }
 
   generarRecomendaciones(lambda,mu, Cq, Cs){
@@ -195,8 +196,8 @@ export class MmsComponent implements OnInit {
   }
 
   calcCosto(lambda, mu, s, Cq,Cs){
-    var lQueueNueva = this.calcService.calcularLQueue(lambda, mu, this.p0, s, 0, 2);
-    this.costo = this.calcService.calcularCosto(lQueueNueva, Cq, s, Cs);
+    var lQueueNueva = this.calcService.calcularLQueue(lambda, mu, this.p0, s, 0, 2); 
+    this.costo = this.calcService.calcularCosto(this.lQueue, Cq, s, Cs);
   }
   
 

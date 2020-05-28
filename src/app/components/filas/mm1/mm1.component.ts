@@ -161,7 +161,7 @@ export class Mm1Component implements OnInit {
 
   calcCosto(lambda, mu, Cq,Cs){
     var lQueueNueva = this.calcService.calcularLQueue(lambda, mu, this.p0, 1, 0, 1);
-    this.costo = this.calcService.calcularCosto(lQueueNueva, Cq, 1, Cs);
+    this.costo = this.calcService.calcularCosto(this.lQueue, Cq, 1, Cs);
   }
   
   cleanData(){

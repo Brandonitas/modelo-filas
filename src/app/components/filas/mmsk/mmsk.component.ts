@@ -140,6 +140,12 @@ export class MmskComponent implements OnInit {
       this.barChartLabels.push("P0");
 
       this.pN = this.calcService.calcularPN(lambda, mu, n, this.p0, s, k, 3);
+
+      this.l = this.calcService.calcularL(lambda, mu, this.p0, s, k, 3);
+      this.lQueue = this.calcService.calcularLQueue(lambda, mu, this.p0, s, k, 3);
+      this.w = this.calcService.calcularW(lambda, mu, this.p0, s, k, 3);
+      this.wQueue = this.calcService.calcularWQueue(lambda, mu, this.p0, s, k, 3);
+
       if(n>0){
         this.pNI = this.calcService.calcularPNIndividualArreglo(lambda, mu, n, this.pNI, this.p0, s, k, 3);
         this.pNA = this.calcService.calcularPNAcumuladaArreglo(lambda, mu, n, this.pNA, this.pNI, this.p0, s, k, 3);
@@ -160,7 +166,7 @@ export class MmskComponent implements OnInit {
 
   calcCosto(lambda, mu, s, k, Cq,Cs){
     var lQueueNueva = this.calcService.calcularLQueue(lambda, mu, this.p0, s, k, 3);
-    this.costo = this.calcService.calcularCosto(lQueueNueva, Cq, s, Cs);
+    this.costo = this.calcService.calcularCosto(this.lQueue, Cq, s, Cs);
   }
 
 
